@@ -1,15 +1,15 @@
 # Sports API Management System
 
 ## **Project Overview**
-This project demonstrates building a containerized API management system for querying sports data. It leverages **Amazon ECS (Fargate)** for running containers, **Amazon API Gateway** for exposing REST endpoints, and an external **Sports API** for real-time sports data. The project showcases advanced cloud computing practices, including API management, container orchestration, and secure AWS integrations.
+This project demonstrates building a containerized API management system for querying sports data. It leverages Amazon ECS (Fargate) for running containers, Amazon API Gateway for exposing REST endpoints, and an external Sports API for real-time sports data. The project showcases advanced cloud computing practices, including API management, container orchestration, and secure AWS integrations.
 
 ---
 
 ## **Features**
 - Exposes a REST API for querying real-time sports data
-- Runs a containerized backend using Amazon ECS with Fargate
-- Scalable and serverless architecture
-- API management and routing using Amazon API Gateway
+- Runs a containerized backend on Amazon ECS with Fargate
+- Features a scalable and serverless architecture
+- Manages API and routing using Amazon API Gateway
  
 ---
 
@@ -60,7 +60,8 @@ cd containerized-sports-api
 ```bash
 aws ecr create-repository --repository-name sports-api --region us-east-1
 ```
-![alt text](image.png)
+![image](https://github.com/user-attachments/assets/c107afd0-79df-42bd-ac65-b7cf1701d5f0)
+
 
 ### **Authenticate Build and Push the Docker Image**
 ```bash
@@ -74,12 +75,16 @@ docker build --platform linux/amd64 -t sports-api .
 docker tag sports-api:latest <AWS_ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/sports-api:sports-api-latest
 docker push <AWS_ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/sports-api:sports-api-latest
 ```
+![image](https://github.com/user-attachments/assets/f4e0ab71-b39c-4cf3-908f-8fd9049dd5c8)
 
-![alt text](image-2.png)
+![image](https://github.com/user-attachments/assets/cdbc4551-d5cd-4bc5-a630-4a598bb50361)
 
-![alt text](image-3.png)
+![image](https://github.com/user-attachments/assets/8132d327-2160-4a3a-9aa4-bc2cd1d76ed6)
 
-![alt text](image-4.png)
+![image](https://github.com/user-attachments/assets/09e3c1cd-a532-4446-abf0-11328751da22)
+
+![image](https://github.com/user-attachments/assets/f99fe035-69d0-49f7-89a3-c2a7ae21e64a)
+
 
 ### **Set Up ECS Cluster with Fargate**
 1. Create an ECS Cluster:
@@ -87,7 +92,7 @@ docker push <AWS_ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/sports-api:sports-a
 - Name your Cluster (sports-api-cluster)
 - For Infrastructure, select Fargate, then create Cluster
 
-![alt text](image-5.png)
+![image](https://github.com/user-attachments/assets/296ad350-d72a-4feb-b250-15fe4c6b5f3e)
 
 
 2. Create a Task Definition:
@@ -106,7 +111,8 @@ docker push <AWS_ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/sports-api:sports-a
   - Value: <YOUR_serpapi.IO_API_KEY>
   - Create task definition
 
-![alt text](image-6.png)
+![image](https://github.com/user-attachments/assets/5f5fdfb6-f183-4689-ae4c-2ef157e701a0)
+
 
 3. Run the Service with an ALB
 - Go to Clusters → Select Cluster → Service → Create.
@@ -125,16 +131,16 @@ docker push <AWS_ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/sports-api:sports-a
  - Target Group health check path: "/sports"
  - Create service
 
-![alt text](image-8.png)
+![image](https://github.com/user-attachments/assets/78e7c1b1-7779-444d-b61b-3f567fc523ef)
 
-![alt text](image-7.png)
+![image](https://github.com/user-attachments/assets/65dc29dd-8766-409c-83c2-b2046bd8efc6)
 
 
 4. Test the ALB:
 - After deploying the ECS service, note the DNS name of the ALB (e.g., sports-api-alb-<AWS_ACCOUNT_ID>.us-east-1.elb.amazonaws.com)
 - Confirm the API is accessible by visiting the ALB DNS name in your browser and adding /sports at end (e.g, http://sports-api-alb-<AWS_ACCOUNT_ID>.us-east-1.elb.amazonaws.com/sports)
 
-![alt text](image-9.png)
+![image](https://github.com/user-attachments/assets/2200f3be-bb34-46e6-8538-7f31fcf31ed8)
 
 ### **Configure API Gateway**
 1. Create a New REST API:
